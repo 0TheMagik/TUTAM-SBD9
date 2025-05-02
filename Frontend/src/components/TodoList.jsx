@@ -1,0 +1,49 @@
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+function TodoList() {
+    const [todos, setTodos] = useState([])
+    const navigate = useNavigate()
+
+useEffect(() => {
+    fetchTodos()
+}, [])
+
+const fetchTodos = async () => {
+    const response = await fetch('http://localhost:5000/get')
+    const data = await response.json()
+    setTodos(data)
+}
+
+const handleDelete = async (id) => {
+    await fetch(`http://localhost:5000/${id}`, { method: 'DELETE' })
+    fetchTodos()
+}
+
+return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {todos.map(todo => (
+        <div key={todo._id} 
+                className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition cursor-pointer"
+                onClick={() => navigate(`/view/${todo._id}`)}>
+            <h3 className="text-xl font-bold mb-4 text-black">{todo.title}</h3>
+        <div className="flex justify-between text-sm text-gray-500">
+            <span>{new Date(todo.date).toLocaleDateString()}</span>
+            <span>{todo.time}</span>
+        </div>
+        <button 
+            onClick={(e) => {
+                e.stopPropagation()
+                handleDelete(todo._id)
+            }}
+            className="mt-2 px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+            Delete
+        </button>
+        </div>
+        ))}
+        </div>
+    )
+}
+
+export default TodoList
