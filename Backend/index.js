@@ -1,10 +1,17 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
 // Environment variables with defaults
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://izzannsyarif:aSVGNCG34pwaIg1A@modul7-sbd.imwkkyg.mongodb.net/Modul9';
+const MONGODB_URI = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 5000;
+
+// Validate MongoDB URI
+if (!MONGODB_URI) {
+    console.error('MONGODB_URI is not defined in environment variables');
+    process.exit(1);
+}
 
 const app = express();
 app.use(cors({
