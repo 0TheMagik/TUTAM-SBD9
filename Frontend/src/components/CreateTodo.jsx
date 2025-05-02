@@ -12,7 +12,7 @@ const [todo, setTodo] = useState({
 
 const handleSubmit = async (e) => {
     e.preventDefault()
-    await fetch('http://localhost:5000/create', {
+    await fetch('https://tutam-sbd-9-backend.vercel.app/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(todo)

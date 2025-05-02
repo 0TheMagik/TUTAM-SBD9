@@ -10,13 +10,13 @@ useEffect(() => {
 }, [])
 
 const fetchTodos = async () => {
-    const response = await fetch('http://localhost:5000/get')
+    const response = await fetch('https://tutam-sbd-9-backend.vercel.app/get')
     const data = await response.json()
     setTodos(data)
 }
 
 const handleDelete = async (id) => {
-    await fetch(`http://localhost:5000/${id}`, { method: 'DELETE' })
+    await fetch(`https://tutam-sbd-9-backend.vercel.app/${id}`, { method: 'DELETE' })
     fetchTodos()
 }
 

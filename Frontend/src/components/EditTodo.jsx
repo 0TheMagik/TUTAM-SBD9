@@ -16,7 +16,7 @@ useEffect(() => {
 }, [id])
 
 const fetchTodo = async () => {
-    const response = await fetch(`http://localhost:5000/${id}`)
+    const response = await fetch(`https://tutam-sbd-9-backend.vercel.app/${id}`)
     const data = await response.json()
     const dateStr = new Date(data.date).toISOString().split('T')[0]
     setTodo({ ...data, date: dateStr })
@@ -24,7 +24,7 @@ const fetchTodo = async () => {
 
 const handleSubmit = async (e) => {
     e.preventDefault()
-    await fetch(`http://localhost:5000/${id}`, {
+    await fetch(`https://tutam-sbd-9-backend.vercel.app/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(todo)

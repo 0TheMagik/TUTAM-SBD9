@@ -8,7 +8,7 @@ const [todo, setTodo] = useState(null)
 
 useEffect(() => {
     const fetchTodo = async () => {
-        const response = await fetch(`http://localhost:5000/${id}`)
+        const response = await fetch(`https://tutam-sbd-9-backend.vercel.app/${id}`)
         const data = await response.json()
         setTodo(data)
     }
